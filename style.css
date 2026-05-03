@@ -41,7 +41,7 @@ body {
   font-size: 24px;
   line-height: 1.2;
   text-align: center;
-  margin: 0 0 12px;
+  margin: 0 0 32px;
   font-weight: 400;
 }
 
@@ -531,13 +531,13 @@ body {
 }
 
 .memories {
-  padding-top: 8px;
+  padding-top: 24px;
 }
 
 .memories-cta {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 32px;
 }
 
 .memories-cta .btn-stack.alt {
@@ -583,16 +583,16 @@ body {
 }
 
 .footer-note {
-  padding: 16px 16px 48px;
+  padding: 24px 16px 48px;
   text-align: center;
 }
 
 .footer-note .heading {
-  margin-bottom: 8px;
+  margin-bottom: 32px;
 }
 
 .footer-note .body-text {
-  margin-bottom: 12px;
+  margin-bottom: 64px;
 }
 
 .footer-heading-spaced {
