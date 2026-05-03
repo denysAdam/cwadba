@@ -1,0 +1,593 @@
+:root {
+  --bg: #fefcfb;
+  --accent: #d3928e;
+  --text: #614e2a;
+  --border: #c6a58a;
+  --brown-deep: #614e2a;
+  --brown-mid: #cb9975;
+  --overlay: rgba(198, 165, 138, 0.5);
+  --mobile-w: 450px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #e8e4df;
+  font-family: "Neucha", cursive, system-ui, sans-serif;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: var(--mobile-w);
+  margin: 0 auto;
+  background: var(--bg);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
+}
+
+.heading {
+  color: var(--accent);
+  font-size: 24px;
+  line-height: 1.2;
+  text-align: center;
+  margin: 0 0 12px;
+  font-weight: 400;
+}
+
+.heading-xl {
+  font-size: 40px;
+  line-height: 1;
+  color: var(--accent);
+  text-align: center;
+  margin: 0;
+  font-weight: 400;
+}
+
+.body-text {
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--text);
+  text-align: center;
+  margin: 0;
+}
+
+/* ——— Hero (flex stack, без absolute) ——— */
+.hero {
+  padding: 32px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: min(100vw, 505px);
+}
+
+.hero-title {
+  width: min(100%, 320px);
+  z-index: 2;
+}
+
+.names-pill {
+  display: block;
+  width: min(100%, 220px);
+  height: 136px;
+  margin-top: 12px;
+  margin-bottom: -48px;
+  z-index: 3;
+}
+
+.names-pill img {
+  width: 100%;
+  height: auto;
+  max-height: 88px;
+  object-fit: contain;
+  display: block;
+}
+
+.hero-wreath-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100vw, 505px);
+  margin-left: clamp(-24px, -5vw, -16px);
+  margin-right: clamp(-24px, -5vw, -16px);
+}
+
+.hero-wreath {
+  width: min(450px, 92vw);
+  height: 100%;
+}
+
+.hero-wreath img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ——— Sections ——— */
+.section {
+  padding: 24px 16px 32px;
+}
+
+.know-visual-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px 16px;
+  margin-top: 20px;
+}
+
+.polaroid-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 8px;
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.polaroid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 170px;
+  height: 170px;
+  flex-shrink: 0;
+}
+
+.polaroid.-tilt-l {
+  transform: rotate(-10deg);
+}
+.polaroid.-tilt-r {
+  transform: rotate(8deg);
+}
+
+.polaroid-layers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+}
+
+.polaroid-layers .frame {
+  width: 150px;
+  height: 150px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.polaroid-layers .frame + .frame {
+  margin-top: -144px;
+}
+
+.polaroid-layers .f3 {
+  transform: rotate(-8deg);
+}
+.polaroid-layers .f2 {
+  transform: rotate(3deg);
+}
+.polaroid-layers .f1 {
+  transform: rotate(-1deg);
+}
+
+.polaroid-layers .photo {
+  margin-top: -138px;
+  width: 140px;
+  height: 140px;
+  border-radius: 5px;
+  overflow: hidden;
+  flex-shrink: 0;
+  z-index: 4;
+}
+
+.polaroid-layers .photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.section.know-block {
+  padding-bottom: 48px;
+}
+
+.leaf-deco {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 80px;
+  flex-shrink: 0;
+  transform: rotate(-21.59deg);
+  margin-top: 24px;
+}
+
+.leaf-deco img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.heart-icon {
+  display: block;
+  margin: 16px auto 0;
+  width: 80px;
+  height: 80px;
+}
+
+.heart-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Calendar */
+.calendar-head {
+  text-align: center;
+  font-size: 16px;
+  color: var(--text);
+  margin: 8px 0 12px;
+}
+
+.calendar-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.calendar-leaf {
+  width: 72px;
+  flex-shrink: 0;
+  transform: rotate(24.87deg);
+  margin-top: 8px;
+  position: absolute;
+  left: 30px;
+  top: -57px;
+}
+
+.calendar-leaf img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.calendar-main {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px 6px;
+  width: 222px;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--text);
+  text-align: center;
+}
+
+.calendar-grid .cell {
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-grid .cell.muted {
+  opacity: 0.35;
+}
+
+.calendar-grid .cell strong {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #c45c5c;
+  font-weight: 400;
+}
+
+.cal-markers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0;
+  width: 32px;
+  flex-shrink: 0;
+  padding-bottom: 4px;
+}
+
+.cal-markers img {
+  width: 30px;
+  height: auto;
+  display: block;
+}
+
+.cal-markers img:nth-child(2) {
+  transform: rotate(-90deg);
+  margin-top: -8px;
+}
+
+/* Where — flex-колонка: фото фіксованої висоти + кнопка з від’ємним margin по центру зображення */
+.map-card {
+  display: block;
+  margin-top: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+.map-card-inner {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.map-card-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  --map-h: 200px;
+}
+
+.map-card-visual img {
+  width: 100%;
+  height: var(--map-h);
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.9) saturate(0.92);
+}
+
+.map-card-visual .btn-stack {
+  margin-top: calc(-1 * (var(--map-h) / 2 + 34px));
+  margin-bottom: calc(var(--map-h) / 2 - 34px);
+}
+
+.btn-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 158px;
+  min-height: 68px;
+  flex-shrink: 0;
+}
+
+.btn-stack .btn-fill {
+  width: 150px;
+  height: 50px;
+  background: var(--brown-deep);
+  border: 1px solid var(--brown-deep);
+  border-radius: 5px;
+  transform: rotate(7deg);
+  margin-bottom: -44px;
+}
+
+.btn-stack .btn-outline {
+  width: 150px;
+  height: 50px;
+  border: 1px solid var(--bg);
+  border-radius: 5px;
+  margin-bottom: -50px;
+}
+
+.btn-stack .btn-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 50px;
+  color: var(--bg);
+  font-size: 16px;
+  z-index: 2;
+  border: 1px solid var(--bg);
+  border-radius: 6px;
+}
+
+.btn-stack.alt .btn-fill {
+  background: var(--brown-mid);
+  border-color: var(--brown-mid);
+  border-radius: 6px;
+}
+
+.btn-stack.alt .btn-outline {
+  border: 2px solid var(--brown-deep);
+  border-radius: 6px;
+}
+
+.btn-stack.alt .btn-label {
+  color: var(--text);
+  border: 0;
+  background: transparent;
+}
+
+/* Тайминг + воспоминания: декор в absolute (icon-pic-*) */
+.timing-memories {
+  position: relative;
+  overflow: visible;
+}
+
+.timing-memories .section {
+  position: relative;
+  z-index: 1;
+}
+
+.icon-pic-1,
+.icon-pic-2,
+.icon-pic-3 {
+  position: absolute;
+  width: min(88px, 22vw);
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.icon-pic-1 {
+  left: clamp(0px, 2vw, 12px);
+  top: 96px;
+}
+
+.icon-pic-2 {
+  right: clamp(0px, 2vw, 12px);
+  top: 38%;
+  transform: translateY(-50%);
+}
+
+.icon-pic-3 {
+  left: clamp(4px, 3vw, 16px);
+  top: 52%;
+}
+
+.timing {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.timing-intro {
+  max-width: 320px;
+  margin: 0 auto 8px;
+  padding: 0 12px;
+}
+
+.timing-list {
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 20px 48px 8px;
+}
+
+.timing-item {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.timing-item:last-child {
+  margin-bottom: 12px;
+}
+
+.timing-item .time {
+  font-size: 32px;
+  line-height: 1;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+
+.timing-item .label {
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--text);
+  margin: 0;
+}
+
+.memories {
+  padding-top: 8px;
+}
+
+.memories-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.memories-cta .btn-stack.alt {
+  position: relative;
+  overflow: visible;
+  width: 160px;
+  min-height: 60px;
+  height: 60px;
+  text-decoration: none;
+}
+
+.memories-cta .btn-stack.alt .btn-fill,
+.memories-cta .btn-stack.alt .btn-outline,
+.memories-cta .btn-stack.alt .btn-label {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 60px;
+  min-height: 60px;
+  margin: 0;
+}
+
+.memories-cta .btn-stack.alt .btn-fill {
+  transform: translateY(1px) rotate(7deg);
+  z-index: 0;
+  left: 9px;
+}
+
+.memories-cta .btn-stack.alt .btn-outline {
+  border: 1px solid var(--brown-deep);
+  z-index: 1;
+}
+
+.memories-cta .btn-stack.alt .btn-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  z-index: 2;
+}
+
+.footer-note {
+  padding: 16px 16px 48px;
+  text-align: center;
+}
+
+.footer-note .heading {
+  margin-bottom: 8px;
+}
+
+.footer-note .body-text {
+  margin-bottom: 12px;
+}
+
+.footer-heading-spaced {
+  margin-top: 28px;
+}
+
+/* Лёгкая «дыхание» героя — не на том же узле, что AOS (transform на .hero-wreath-wrap) */
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.reduce-motion) .hero .hero-stack .hero-wreath {
+    animation: hero-wreath-float 9s ease-in-out infinite;
+  }
+}
+
+@keyframes hero-wreath-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
