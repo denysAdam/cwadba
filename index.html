@@ -158,7 +158,22 @@
   <script>
     (function () {
       var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var links = document.querySelectorAll("a[href]");
+
       if (reduce) document.documentElement.classList.add("reduce-motion");
+
+      links.forEach(function (link) {
+        var href = link.getAttribute("href") || "";
+        var rel = (link.getAttribute("rel") || "").split(/\s+/).filter(Boolean);
+
+        if (!href || href.charAt(0) === "#" || href.indexOf("javascript:") === 0) return;
+
+        link.setAttribute("target", "_blank");
+        if (rel.indexOf("noopener") === -1) rel.push("noopener");
+        if (rel.indexOf("noreferrer") === -1) rel.push("noreferrer");
+        link.setAttribute("rel", rel.join(" "));
+      });
+
       AOS.init({
         disable: reduce,
         duration: reduce ? 0 : 880,

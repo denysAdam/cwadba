@@ -36,6 +36,7 @@ body {
 }
 
 .heading {
+  position: relative;
   color: var(--accent);
   font-size: 24px;
   line-height: 1.2;
@@ -45,6 +46,7 @@ body {
 }
 
 .heading-xl {
+  position: relative;
   font-size: 40px;
   line-height: 1;
   color: var(--accent);
@@ -301,13 +303,35 @@ body {
 
 .calendar-grid .cell strong {
   display: inline-flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   width: 28px;
   height: 28px;
   border-radius: 50%;
   border: 2px solid #c45c5c;
+  color: #8f3e46;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.98) 0%, rgba(252, 241, 240, 0.96) 45%, rgba(244, 219, 218, 0.94) 100%);
+  box-shadow: 0 4px 12px rgba(196, 92, 92, 0.14);
   font-weight: 400;
+  isolation: isolate;
+}
+
+.calendar-grid .cell strong::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244, 219, 218, 0.45) 0%, rgba(244, 219, 218, 0.18) 45%, rgba(244, 219, 218, 0) 72%);
+  opacity: 0.7;
+  filter: blur(2px);
+  z-index: -1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.reduce-motion) .calendar-grid .cell strong {
+    animation: wedding-date-breathe 4.2s ease-in-out infinite;
+  }
 }
 
 .cal-markers {
@@ -589,5 +613,174 @@ body {
   }
   50% {
     transform: translateY(-8px);
+  }
+}
+
+@keyframes wedding-date-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(196, 92, 92, 0.14);
+  }
+  50% {
+    transform: scale(1.035);
+    box-shadow: 0 6px 16px rgba(196, 92, 92, 0.18);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.reduce-motion) .heading[data-aos],
+  html:not(.reduce-motion) .heading-xl[data-aos],
+  html:not(.reduce-motion) .hero-title .heading-xl {
+    text-shadow: 0 0 0 rgba(211, 146, 142, 0);
+  }
+
+  html:not(.reduce-motion) .heading[data-aos].aos-animate,
+  html:not(.reduce-motion) .heading-xl[data-aos].aos-animate,
+  html:not(.reduce-motion) .hero-title[data-aos].aos-animate .heading-xl {
+    animation: heading-ink-settle 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  html:not(.reduce-motion) .heading[data-aos]::after,
+  html:not(.reduce-motion) .heading-xl[data-aos]::after,
+  html:not(.reduce-motion) .hero-title .heading-xl::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -0.28em;
+    width: min(132px, 48%);
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent 0%, rgba(211, 146, 142, 0.92) 22%, rgba(203, 153, 117, 0.88) 78%, transparent 100%);
+    transform: translateX(-50%) scaleX(0.2);
+    transform-origin: center;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  html:not(.reduce-motion) .heading[data-aos].aos-animate::after,
+  html:not(.reduce-motion) .heading-xl[data-aos].aos-animate::after,
+  html:not(.reduce-motion) .hero-title[data-aos].aos-animate .heading-xl::after {
+    animation: heading-underline-draw 760ms cubic-bezier(0.23, 1, 0.32, 1) 120ms both;
+  }
+
+  html:not(.reduce-motion) .body-text[data-aos],
+  html:not(.reduce-motion) .calendar-head[data-aos] {
+    clip-path: inset(0 100% 0 0);
+    filter: blur(8px);
+  }
+
+  html:not(.reduce-motion) .body-text[data-aos].aos-animate,
+  html:not(.reduce-motion) .calendar-head[data-aos].aos-animate {
+    animation: copy-ribbon-reveal 920ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  html:not(.reduce-motion) .timing-item.aos-animate .time {
+    animation: time-bloom 760ms cubic-bezier(0.2, 0.85, 0.2, 1) both;
+    transform-origin: center;
+  }
+
+  html:not(.reduce-motion) .timing-item.aos-animate .label {
+    animation: copy-soft-rise 860ms cubic-bezier(0.22, 1, 0.36, 1) 80ms both;
+  }
+
+  html:not(.reduce-motion) .memories-cta.aos-animate .btn-label,
+  html:not(.reduce-motion) .map-card[data-aos].aos-animate .btn-label {
+    animation: label-warm-settle 880ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    transform-origin: center;
+  }
+}
+
+@keyframes heading-ink-settle {
+  0% {
+    letter-spacing: 0.14em;
+    filter: blur(10px);
+    text-shadow: 0 0 18px rgba(211, 146, 142, 0.2);
+  }
+  65% {
+    letter-spacing: 0.045em;
+    filter: blur(0);
+    text-shadow: 0 0 10px rgba(211, 146, 142, 0.16);
+  }
+  100% {
+    letter-spacing: 0.02em;
+    filter: blur(0);
+    text-shadow: 0 0 0 rgba(211, 146, 142, 0);
+  }
+}
+
+@keyframes heading-underline-draw {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0.2);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.85;
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+
+@keyframes copy-ribbon-reveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    filter: blur(8px);
+    letter-spacing: 0.06em;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    filter: blur(0);
+    letter-spacing: 0;
+  }
+}
+
+@keyframes copy-soft-rise {
+  0% {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes time-bloom {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(0.82);
+  }
+  62% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes label-warm-settle {
+  0% {
+    opacity: 0;
+    filter: blur(6px);
+    letter-spacing: 0.08em;
+  }
+  60% {
+    opacity: 1;
+    filter: blur(0);
+    letter-spacing: 0.03em;
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    letter-spacing: 0.02em;
   }
 }
