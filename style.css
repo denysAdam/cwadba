@@ -784,3 +784,359 @@ body {
     letter-spacing: 0.02em;
   }
 }
+
+/* ——— Envelope intro overlay ——— */
+body.envelope-locked {
+  overflow: hidden;
+}
+
+.envelope-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 24px;
+  background: radial-gradient(circle at 50% 40%, #f6ebe2 0%, #d9c3b0 100%);
+  cursor: pointer;
+  perspective: 1400px;
+  transition: opacity 0.8s ease, visibility 0s linear 0.8s;
+}
+
+.envelope-overlay.is-open {
+  pointer-events: none;
+}
+
+.envelope-overlay.is-exiting {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.envelope-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transform: translateY(0) rotate(0) scale(1);
+  opacity: 1;
+  animation: envelopeIntro 1s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+  transition: transform 1.15s cubic-bezier(0.52, 0.02, 0.26, 1),
+              opacity 0.9s ease 0.12s;
+  will-change: transform, opacity;
+}
+
+.envelope {
+  position: relative;
+  width: min(82vw, 340px);
+  aspect-ratio: 3 / 2;
+  transform-style: preserve-3d;
+}
+
+.envelope-overlay.is-exiting .envelope-wrap {
+  transform: translateY(120vh) rotate(-6deg) scale(0.85);
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes envelopeIntro {
+  0%   { opacity: 0; transform: scale(0.6) rotate(-8deg) translateY(40px); }
+  60%  { opacity: 1; transform: scale(1.04) rotate(1deg) translateY(0); }
+  100% { opacity: 1; transform: scale(1) rotate(0) translateY(0); }
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #d3928e 0%, #b7766f 100%);
+  border-radius: 6px;
+  box-shadow:
+    0 18px 40px rgba(60, 30, 20, 0.28),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+.envelope-letter {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 12%;
+  bottom: 18%;
+  background: #fefcfb;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--accent);
+  font-family: "Neucha", cursive;
+  box-shadow: 0 6px 18px rgba(60, 30, 20, 0.22);
+  transform: translateY(0) scale(1);
+  transition: transform 1.45s cubic-bezier(0.22, 0.9, 0.2, 1) 0.24s,
+              box-shadow 1.15s ease 0.2s;
+  z-index: 1;
+}
+
+.envelope-overlay.is-open .envelope-letter {
+  transform: translateY(-64%) scale(1.045);
+  box-shadow: 0 18px 32px rgba(60, 30, 20, 0.18);
+}
+
+.letter-title {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1.05;
+  color: var(--accent);
+}
+
+.letter-sub {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: var(--text);
+  opacity: 0.85;
+}
+
+.envelope-body {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.envelope-side {
+  position: absolute;
+  background: linear-gradient(160deg, #d3928e 0%, #b7766f 100%);
+}
+
+.envelope-side-left {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 52%;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.05);
+}
+
+.envelope-side-right {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 52%;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.05);
+}
+
+.envelope-side-bottom {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 56%;
+  clip-path: polygon(0 100%, 100% 100%, 50% 0);
+  background: linear-gradient(180deg, #c98681 0%, #a66962 100%);
+}
+
+.envelope-flap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 64%;
+  background: linear-gradient(180deg, #e1a39f 0%, #c1827c 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  transition: transform 1.35s cubic-bezier(0.25, 0.86, 0.28, 1),
+              z-index 0s linear 0.72s,
+              box-shadow 0.8s ease;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: visible;
+  box-shadow: inset 0 -10px 18px rgba(255, 255, 255, 0.08),
+              0 12px 22px rgba(80, 35, 28, 0.16);
+}
+
+.envelope-overlay.is-open .envelope-flap {
+  transform: rotateX(-174deg);
+  z-index: 0;
+}
+
+.envelope-seal {
+  position: absolute;
+  top: 28%;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #8b3b3b 0%, #5a2424 80%);
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f3d9c8;
+  font-family: "Neucha", cursive;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  transition: transform 0.6s ease, opacity 0.45s ease 0.08s;
+}
+
+.envelope-seal span {
+  transform: translateY(-1px);
+}
+
+.envelope-overlay.is-open .envelope-seal {
+  transform: scale(0.82);
+  opacity: 0.08;
+}
+
+.envelope-overlay:hover .envelope-seal {
+  transform: scale(1.06);
+}
+
+.envelope-hint {
+  margin: 0;
+  color: var(--text);
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+  animation: envelopePulse 1.8s ease-in-out infinite;
+}
+
+.envelope-overlay.is-open .envelope-hint {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+@keyframes envelopePulse {
+  0%, 100% { opacity: 0.55; transform: translateY(0); }
+  50% { opacity: 0.95; transform: translateY(-2px); }
+}
+
+/* ——— Floating flowers around envelope ——— */
+.envelope-flowers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.flower {
+  position: absolute;
+  width: 90px;
+  height: auto;
+  opacity: 0;
+  filter: drop-shadow(0 6px 14px rgba(60, 30, 20, 0.18));
+  animation: flowerIn 1.1s cubic-bezier(0.2, 0.9, 0.3, 1.2) forwards,
+             flowerSway 6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.flower-1 { top: 6%;  left: 4%;   width: 110px; animation-delay: 0.2s, 1.3s; transform: rotate(-12deg); }
+.flower-2 { top: 10%; right: 3%;  width: 120px; animation-delay: 0.35s, 1.5s; transform: rotate(18deg); }
+.flower-3 { top: 38%; left: -2%;  width: 80px;  animation-delay: 0.5s, 1.2s; transform: rotate(8deg); }
+.flower-4 { bottom: 20%; right: -2%; width: 100px; animation-delay: 0.65s, 1.8s; transform: rotate(-22deg); }
+.flower-5 { bottom: 6%; left: 8%; width: 95px; animation-delay: 0.8s, 1.6s; transform: rotate(14deg); }
+.flower-6 { bottom: 10%; right: 10%; width: 85px; animation-delay: 0.95s, 1.4s; transform: rotate(-6deg); }
+.flower-7 { top: 2%; left: 42%; width: 70px; animation-delay: 1.1s, 2s; transform: rotate(24deg); }
+.flower-8 { bottom: 2%; left: 40%; width: 65px; animation-delay: 1.25s, 1.9s; transform: rotate(-18deg); }
+
+@keyframes flowerIn {
+  0%   { opacity: 0; transform: scale(0.3) rotate(0deg); }
+  100% { opacity: 0.92; }
+}
+
+@keyframes flowerSway {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -10px; }
+}
+
+.envelope-overlay.is-open .flower {
+  animation: flowerOut 1.2s cubic-bezier(0.55, 0, 0.4, 1) forwards;
+}
+
+.envelope-overlay.is-open .flower-1 { animation-delay: 1.7s; --fx: -120px; --fy: -180px; --fr: -45deg; }
+.envelope-overlay.is-open .flower-2 { animation-delay: 1.75s; --fx: 140px; --fy: -200px; --fr: 60deg; }
+.envelope-overlay.is-open .flower-3 { animation-delay: 1.8s; --fx: -180px; --fy: -80px; --fr: -30deg; }
+.envelope-overlay.is-open .flower-4 { animation-delay: 1.82s; --fx: 200px; --fy: 60px; --fr: 50deg; }
+.envelope-overlay.is-open .flower-5 { animation-delay: 1.88s; --fx: -100px; --fy: 220px; --fr: -25deg; }
+.envelope-overlay.is-open .flower-6 { animation-delay: 1.92s; --fx: 150px; --fy: 240px; --fr: 35deg; }
+.envelope-overlay.is-open .flower-7 { animation-delay: 1.78s; --fx: 0; --fy: -260px; --fr: 60deg; }
+.envelope-overlay.is-open .flower-8 { animation-delay: 1.98s; --fx: 0; --fy: 280px; --fr: -55deg; }
+
+@keyframes flowerOut {
+  to {
+    opacity: 0;
+    transform: translate(var(--fx, 0), var(--fy, -120px)) rotate(var(--fr, 0deg)) scale(0.6);
+  }
+}
+
+/* ——— Petals confetti when opening ——— */
+.envelope-petals {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  width: 14px;
+  height: 18px;
+  background: radial-gradient(circle at 30% 30%, #f4c4be 0%, #d3928e 70%, #b7766f 100%);
+  border-radius: 60% 40% 70% 30% / 60% 50% 50% 40%;
+  opacity: 0;
+  transform-origin: center;
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.envelope-overlay.is-open .petal {
+  animation: petalBurst 1.4s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+.envelope-overlay.is-open .p1 { --px: -160px; --py: -180px; --pr: -120deg; animation-delay: 0.6s; }
+.envelope-overlay.is-open .p2 { --px:  170px; --py: -190px; --pr:  140deg; animation-delay: 0.65s; }
+.envelope-overlay.is-open .p3 { --px: -220px; --py:  -40px; --pr:  -80deg; animation-delay: 0.7s; }
+.envelope-overlay.is-open .p4 { --px:  230px; --py:  -20px; --pr:   90deg; animation-delay: 0.75s; }
+.envelope-overlay.is-open .p5 { --px:  -90px; --py:  220px; --pr: -160deg; animation-delay: 0.8s; }
+.envelope-overlay.is-open .p6 { --px:  110px; --py:  240px; --pr:  170deg; animation-delay: 0.85s; }
+.envelope-overlay.is-open .p7 { --px:    0px; --py: -260px; --pr:   30deg; animation-delay: 0.62s; }
+.envelope-overlay.is-open .p8 { --px:  -40px; --py:  280px; --pr: -200deg; animation-delay: 0.9s; }
+
+@keyframes petalBurst {
+  0%   { opacity: 0; transform: translate(0, 0) rotate(0) scale(0.4); }
+  20%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--px), var(--py)) rotate(var(--pr)) scale(1); }
+}
+
+/* Seal pulse */
+.envelope-seal {
+  animation: sealPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes sealPulse {
+  0%, 100% { box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 0 0 2px rgba(255,255,255,0.12), 0 0 0 0 rgba(211, 146, 142, 0.5); }
+  50%      { box-shadow: 0 4px 14px rgba(0,0,0,0.32), inset 0 0 0 2px rgba(255,255,255,0.18), 0 0 0 14px rgba(211, 146, 142, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .envelope-overlay,
+  .envelope,
+  .envelope-wrap,
+  .envelope-letter,
+  .envelope-flap,
+  .envelope-hint,
+  .flower,
+  .petal,
+  .envelope-seal {
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    animation: none !important;
+  }
+}

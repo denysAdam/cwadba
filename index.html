@@ -10,7 +10,49 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="envelope-locked">
+  <div class="envelope-overlay" id="envelopeOverlay" role="button" tabindex="0" aria-label="Открыть приглашение">
+    <div class="envelope-flowers" aria-hidden="true">
+      <img class="flower flower-1" src="./public/icon-pic-1.png" alt="" />
+      <img class="flower flower-2" src="./public/icon-pic-2.png" alt="" />
+      <img class="flower flower-3" src="./public/icon-pic-3.png" alt="" />
+      <img class="flower flower-4" src="./public/icon-pic-1.png" alt="" />
+      <img class="flower flower-5" src="./public/icon-pic-2.png" alt="" />
+      <img class="flower flower-6" src="./public/icon-pic-3.png" alt="" />
+      <img class="flower flower-7" src="./public/icon-pic-1.png" alt="" />
+      <img class="flower flower-8" src="./public/icon-pic-3.png" alt="" />
+    </div>
+    <div class="envelope-petals" aria-hidden="true">
+      <span class="petal p1"></span>
+      <span class="petal p2"></span>
+      <span class="petal p3"></span>
+      <span class="petal p4"></span>
+      <span class="petal p5"></span>
+      <span class="petal p6"></span>
+      <span class="petal p7"></span>
+      <span class="petal p8"></span>
+    </div>
+    <div class="envelope-wrap">
+      <div class="envelope">
+        <div class="envelope-back"></div>
+        <div class="envelope-letter">
+          <p class="letter-title">Денис<br/>&amp;<br/>Полина</p>
+          <p class="letter-sub">приглашают вас<br/>на свадьбу</p>
+        </div>
+        <div class="envelope-body">
+          <div class="envelope-side envelope-side-left"></div>
+          <div class="envelope-side envelope-side-right"></div>
+          <div class="envelope-side envelope-side-bottom"></div>
+        </div>
+        <div class="envelope-flap">
+          <div class="envelope-seal" aria-hidden="true">
+            <span>D &amp; P</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="envelope-hint">нажмите, чтобы открыть</p>
+  </div>
   <main class="page" role="main">
     <!-- Ресурсы из экспорта Figma MCP; при истечении срока замените src на локальные файлы / новый экспорт -->
     <section class="hero" aria-label="Приглашение">
@@ -185,6 +227,29 @@
       if (!reduce) {
         window.addEventListener("load", function () {
           AOS.refresh();
+        });
+      }
+
+      var overlay = document.getElementById("envelopeOverlay");
+      if (overlay) {
+        var openEnvelope = function () {
+          if (overlay.classList.contains("is-open")) return;
+          overlay.classList.add("is-open");
+          setTimeout(function () {
+            overlay.classList.add("is-exiting");
+            document.body.classList.remove("envelope-locked");
+            if (typeof AOS !== "undefined") AOS.refresh();
+          }, 2350);
+          setTimeout(function () {
+            overlay.parentNode && overlay.parentNode.removeChild(overlay);
+          }, 4350);
+        };
+        overlay.addEventListener("click", openEnvelope);
+        overlay.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openEnvelope();
+          }
         });
       }
     })();
