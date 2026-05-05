@@ -55,6 +55,11 @@ body {
   font-weight: 400;
 }
 
+.heading-xl-centered {
+  text-align: center;
+  margin-top: 48px;
+}
+
 .body-text {
   font-size: 16px;
   line-height: 1.2;
@@ -585,14 +590,39 @@ body {
 .footer-note {
   padding: 32px 16px 48px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
+.footer-note .side-image {
+  position: absolute;
+  width: 110px;
+  height: 150px;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.footer-note .side-image.left {
+  left: -17px;
+  top: 146px;
+}
+
+.footer-note .side-image.right {
+  right: -17px;
+  bottom: 410px;
+  transform: rotate(180deg);
+}
 .footer-note .heading {
   margin-bottom: 32px;
 }
 
 .footer-note .body-text {
   margin-bottom: 64px;
+}
+
+.footer-note .body-text.body-text--smaller-margin {
+  margin-bottom: 32px;
 }
 
 .footer-heading-spaced {
